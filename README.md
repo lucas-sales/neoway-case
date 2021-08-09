@@ -24,26 +24,52 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 Para instalar o Neoway-case, siga estas etapas:
 
+Baixe/Clone o repositório na sua máquina e em seguida crie um arquivo na pasta raiz chamado <.env>
+com as credenciais do banco postgre que deseja acessar.
+
+Após adicionar as credenciais no arquivo <.env>, execute o comando abaixo para montar a imagem Docker:
+
 Linux e macOS:
 ```
-<comando_de_instalação>
+$ docker-compose up -d --build
 ```
 
 Windows:
 ```
-<comando_de_instalação>
+$ docker-compose up -d --build
 ```
+
+Obs: Seu prompt de comando deve estar na pasta raiz do projeto para executar este comando
 
 ## ☕ Usando Neoway-case
 
 Para usar Neoway-case, siga estas etapas:
 
+Utilize o comando abaixo para acessar a imagem montada:
+
+Linux e macOS:
 ```
-<exemplo_de_uso>
+$ docker exec -it neoway_app bash
 ```
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+Windows:
+```
+$ docker exec -it neoway_app bash
+```
 
+Quando o prompt acessar o container basta apenas executar o script principal.
+
+Linux e macOS:
+```
+/neoway# python main.py
+```
+
+Windows:
+```
+/neoway# python main.py
+```
+Obs: Nesta versão, o projeto leva em torno de 4:40min para armazenar por volta de 35mil registros.
+Para verificar o banco de dados basta usar uma ferramenta como o DBeaver ou o pgAdmin4, se conectar com as credenciais e executar querys.
 
 
 [⬆ Voltar ao topo](#Neoway-case)<br>
