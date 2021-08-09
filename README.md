@@ -1,7 +1,7 @@
 # Neoway-case
 
 
-> Este projeto recebe um arquivo txt, processa os dados e os grava em uma instância postgres no RDS da aws.
+> Este projeto recebe um arquivo txt, processa os dados e os grava em uma instância postgres.
 
 ### Ajustes e melhorias
 
