@@ -14,12 +14,12 @@ class DataCleaner:
             check_cpf, line[0] = self._verify_cpf(line[0])
             check_private = self._verify_private(line[1])
             check_incomplete = self._verify_incomplete(line[2])
+            check_date, line[3] = self._verify_date(line[3])
             line[-2] = self._verify_store_freq(line[-2])
             line[-1] = self._verify_last_store(line[-1])
-            line[3] = self._verify_date(line[3])
             line[4] = self._verify_currency(line[4])
             line[5] = self._verify_currency(line[5])
-            if check_cpf and check_private and check_incomplete:
+            if check_cpf and check_private and check_incomplete and check_date:
                 self.new_data.append(line)
             else:
                 pass
@@ -57,7 +57,10 @@ class DataCleaner:
 
     def _verify_date(self, data):
         data = data.replace("-", "")
-        return data
+        if data == "NULL":
+            return False, data
+        else:
+            return True, data
 
     def _verify_currency(self, data):
         data = data.replace(",", ".")

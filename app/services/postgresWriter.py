@@ -1,5 +1,6 @@
 import psycopg2 as db
 from decouple import config
+from psycopg2.extras import execute_values
 
 
 class Config:
@@ -46,8 +47,9 @@ class Connection(Config):
     def fetchall(self):
         return self.cursor.fetchall()
 
-    def execute(self, sql, params=None):
-        self.cursor.execute(sql, params or ())
+    def execute(self, values):
+        execute_values(self.cursor,
+                       "INSERT INTO neoway_case_tbl VALUES %s", values)
 
     def query(self, sql, params=None):
         self.cursor.execute(sql, params or ())
@@ -60,36 +62,12 @@ class Db(Connection):
 
     def insert(self, values):
         try:
-
-            sql = "INSERT INTO neoway_case_tbl (" \
-                  "cpf," \
-                  "private," \
-                  "incompleto," \
-                  "data_ultima_compra," \
-                  "ticket_medio," \
-                  "ticket_ultima_compra," \
-                  "loja_mais_frequente," \
-                  "loja_ultima_compra) " \
-                  "VALUES ({cpf}, {private}, {incompleto}, {data_ultima_compra}, {ticket_medio}, " \
-                  "{ticket_ultima_compra}, {loja_mais_frequente}, {loja_ultima_compra})".format(
-                    cpf=values[0],
-                    private=values[1],
-                    incompleto=values[2],
-                    data_ultima_compra=values[3],
-                    ticket_medio=values[4],
-                    ticket_ultima_compra=values[5],
-                    loja_mais_frequente=values[6],
-                    loja_ultima_compra=values[-1])
-
-            self.execute(sql)
+            print("this operation may take a few minutes...")
+            self.execute(values)
             self.commit()
+
+            print("job finished")
 
         except Exception as e:
             print("Erro ao inserir", e)
 
-    def insert_lines(self, data):
-        try:
-            for row in data:
-                self.insert(row)
-        except Exception as e:
-            print(e)
