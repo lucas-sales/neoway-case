@@ -1,9 +1,9 @@
 # Docker Compose Definitions for local Developer Environment
-version: '3'
+version: '2.2'
 
 services:
 
-  orchestrator_app:
+ neoway_app:
     container_name: neoway_app
     build:
       context: ./
@@ -12,6 +12,6 @@ services:
     env_file:
       - .env
     ports:
-      - "5001:5001"
+      - "5432:5432"
     volumes:
       - ./:/neoway

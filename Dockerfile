@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 harbor.dell.com/devops-images/python-devops:3.8_v2.3.0
+FROM python:3.8-slim-buster
 
 # Install Python base packages
 RUN python3.8 -m pip install --no-cache-dir --upgrade pip
